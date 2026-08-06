@@ -1,0 +1,24 @@
+<div class="ring-wrap">
+    <svg viewBox="0 0 300 300" class="ring-svg">
+        <!-- Base track circle — the "circuit" the arcs sit on -->
+        <circle cx="150" cy="150" r="130" class="track-base" />
+
+        <!-- @for over computed arcs: each stint becomes one colored arc.
+             track by compound+startAngle since stints don't have stable
+             ids yet — good enough while the list is short and ordered. -->
+        @for (arc of arcs(); track arc.startAngle) {
+        <path
+                [attr.d]="arc.pathD"
+                [style.stroke]="colorFor(arc.compound)"
+                class="stint-arc"
+        />
+        }
+    </svg>
+
+    <!-- Centered readout — the number the whole ring exists to justify -->
+    <div class="ring-center">
+        <span class="ring-label">PREDICTED</span>
+        <span class="ring-time">{{ formattedTotalTime() ?? '—:—:—.——' }}</span>
+        <span class="ring-laps">{{ totalLaps() }} LAPS</span>
+    </div>
+</div>

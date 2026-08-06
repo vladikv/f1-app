@@ -1,0 +1,27 @@
+<section class="hero">
+    <div class="hero-3d">
+        <app-tyre-scene />
+    </div>
+
+    <div class="hero-content">
+        <span class="hero-eyebrow">PIT WALL // STRATEGY ENGINE</span>
+        <h1 class="hero-title">
+            Every stint is<br />
+            a bet on <span class="accent">degradation</span>.
+        </h1>
+        <p class="hero-sub">
+            Build a pit-stop strategy, run it against the Strategy Engine's
+            tyre model, and see how close you get to the real race result.
+        </p>
+        <a routerLink="/strategy/1/1" class="hero-cta">Build a strategy →</a>
+    </div>
+
+    <div class="hero-ring">
+        <app-strategy-ring
+                [stints]="sampleStints"
+                [totalLaps]="sampleTotalLaps"
+                [formattedTotalTime]="'1:32:04.71'"
+        />
+        <p class="hero-ring-caption">Sample: 3-stop, Monaco GP</p>
+    </div>
+</section>

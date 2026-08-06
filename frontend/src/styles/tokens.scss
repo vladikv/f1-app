@@ -1,0 +1,64 @@
+/*
+ * Design tokens for the "Pit Wall" visual identity.
+ * Colors are grounded in real FIA timing-tower conventions:
+ * purple = fastest sector, green = personal best, amber = tyre
+ * degradation warning — not decorative neon.
+ */
+:root {
+  /* Color */
+  --bg-void: #0b0e14;
+  --surface: #151a24;
+  --surface-raised: #1c2330;
+  --border-hairline: #2a3242;
+
+  --purple-sector: #7c3fe0;
+  --green-pb: #00d9a3;
+  --amber-warn: #ffb020;
+  --red-flag: #ff4757;
+
+  --text-primary: #e8eaf0;
+  --text-secondary: #8a92a6;
+  --text-dim: #4d5566;
+
+  /* Tyre compound colors — match real F1 broadcast convention */
+  --tyre-soft: #ff4757;
+  --tyre-medium: #ffd23f;
+  --tyre-hard: #f5f5f5;
+  --tyre-intermediate: #00d9a3;
+  --tyre-wet: #4d9fff;
+
+  /* Type */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-body: 'IBM Plex Sans', sans-serif;
+
+  /* Layout */
+  --radius-panel: 10px;
+  --shadow-panel: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--purple-sector);
+  outline-offset: 2px;
+}

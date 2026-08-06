@@ -1,0 +1,76 @@
+<div class="strategy-builder">
+  <h2>Strategy Builder</h2>
+
+  <!-- @for is the new Angular 17 control-flow syntax, replacing *ngFor.
+       It requires a `track` expression (here, the stint's index) so
+       Angular can efficiently diff the list instead of re-rendering
+       everything on every change. -->
+  <div class="stint-list">
+    @for (stint of stints(); track $index) {
+      <div class="stint-row">
+        <select
+          [ngModel]="stint.compound"
+          (ngModelChange)="updateStint($index, { compound: $event })">
+          @for (compound of compounds; track compound) {
+            <option [value]="compound">{{ compound }}</option>
+          }
+        </select>
+
+        <label>
+          Lap
+          <input
+            type="number"
+            [ngModel]="stint.startLap"
+            (ngModelChange)="updateStint($index, { startLap: +$event })" />
+        </label>
+
+        <span>→</span>
+
+        <label>
+          Lap
+          <input
+            type="number"
+            [ngModel]="stint.endLap"
+            (ngModelChange)="updateStint($index, { endLap: +$event })" />
+        </label>
+
+        <button type="button" (click)="removeStint($index)" [disabled]="stints().length === 1">
+          Remove
+        </button>
+      </div>
+    }
+  </div>
+
+  <button type="button" (click)="addStint()">+ Add stint</button>
+
+  <p class="coverage" [class.invalid]="!isStrategyValid()">
+    Laps covered: {{ lapsCovered() }} / {{ totalLaps() }}
+  </p>
+
+  <!-- @if is the new control-flow replacement for *ngIf -->
+  @if (errorMessage()) {
+    <p class="error">{{ errorMessage() }}</p>
+  }
+
+  <button
+    type="button"
+    class="simulate-btn"
+    [disabled]="isSimulating() || !isStrategyValid()"
+    (click)="runSimulation()">
+    @if (isSimulating()) {
+      Simulating...
+    } @else {
+      Run Simulation
+    }
+  </button>
+
+  @if (result(); as sim) {
+    <div class="result-card">
+      <h3>Predicted race time</h3>
+      <p class="total-time">{{ sim.formattedTotalTime }}</p>
+      @if (sim.deltaVsActualSeconds !== null) {
+        <p>Delta vs actual result: {{ sim.deltaVsActualSeconds }}s</p>
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,32 @@
+server:
+  port: 8090
+
+spring:
+  application:
+    name: f1-strategy-simulator
+  datasource:
+    url: jdbc:postgresql://localhost:5435/f1sim
+    username: ${DB_USERNAME:f1sim}
+    password: ${DB_PASSWORD:f1sim}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6381}
+
+jwt:
+  secret: ${JWT_SECRET:change-this-in-production-min-32-chars}
+  expiration-ms: 86400000
+
+openf1:
+  base-url: https://api.openf1.org/v1
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
