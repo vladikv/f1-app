@@ -1,8 +1,4 @@
 <section class="hero">
-    <div class="hero-3d">
-        <app-tyre-scene />
-    </div>
-
     <div class="hero-content">
         <span class="hero-eyebrow">PIT WALL // STRATEGY ENGINE</span>
         <h1 class="hero-title">
@@ -16,12 +12,31 @@
         <a routerLink="/strategy/1/1" class="hero-cta">Build a strategy →</a>
     </div>
 
-    <div class="hero-ring">
-        <app-strategy-ring
-                [stints]="sampleStints"
-                [totalLaps]="sampleTotalLaps"
-                [formattedTotalTime]="'1:32:04.71'"
-        />
-        <p class="hero-ring-caption">Sample: 3-stop, Monaco GP</p>
+    <div class="hero-track">
+        <div class="panel-header">
+            <select
+                    class="track-select"
+                    [ngModel]="selectedTrackId()"
+                    (ngModelChange)="selectedTrackId.set($event)"
+            >
+                @for (t of availableTracks; track t.id) {
+                <option [value]="t.id">{{ t.displayName }}</option>
+                }
+            </select>
+
+            <div class="stat-badge">
+                <div class="stat-item">
+                    <span class="stat-value">{{ estimatedLaps() ?? '—' }}</span>
+                    <span class="stat-label">LAPS</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-value">{{ estimatedTotalTime() ?? '—:—:—' }}</span>
+                    <span class="stat-label">EST. TIME</span>
+                </div>
+            </div>
+        </div>
+
+        <app-circuit-track [track]="selectedTrack()" />
     </div>
 </section>

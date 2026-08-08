@@ -1,0 +1,34 @@
+<div class="track-wrap">
+    <svg [attr.viewBox]="track().viewBox" class="track-svg">
+        <path [attr.id]="pathId" [attr.d]="track().fullPathD" fill="none" stroke="none" />
+
+        @for (sector of track().sectors; track sector.name) {
+        <path
+                [attr.d]="sector.pathD"
+                [style.stroke]="sector.colorVar"
+                class="sector-accent"
+        />
+        }
+
+        <path [attr.d]="track().fullPathD" class="track-line" />
+
+        @for (corner of track().corners; track corner.number) {
+        <g class="corner-marker" [attr.transform]="'translate(' + corner.x + ',' + corner.y + ')'">
+            <circle r="3.5" class="corner-dot" />
+            <text class="corner-label" x="6" y="3">{{ corner.number }}</text>
+        </g>
+        }
+
+        <circle r="4" class="lap-marker">
+            <animateMotion [attr.dur]="'7s'" repeatCount="indefinite" rotate="auto">
+                <mpath [attr.href]="'#' + pathId" />
+            </animateMotion>
+        </circle>
+    </svg>
+
+    <div class="track-legend">
+        <span class="legend-item" style="--dot-color: var(--purple-sector)">S1</span>
+        <span class="legend-item" style="--dot-color: var(--green-pb)">S2</span>
+        <span class="legend-item" style="--dot-color: var(--amber-warn)">S3</span>
+    </div>
+</div>
