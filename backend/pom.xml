@@ -93,6 +93,12 @@
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
 
+        <!-- AOP proxies — required for @Retryable to work -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
         <!-- Scheduling / batch ingestion -->
         <dependency>
             <groupId>org.springframework.retry</groupId>

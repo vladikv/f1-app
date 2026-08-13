@@ -17,17 +17,7 @@ import lombok.*;
 @Builder
 public class Circuit {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
-    private String country;
-
-    @Column(name = "total_laps", nullable = false)
+    @Column(name = "total_laps")
     private Integer totalLaps;
 
     @Column(name = "lap_length_km", nullable = false)
@@ -40,4 +30,8 @@ public class Circuit {
     /** Historical overtaking difficulty, 1 (easy) to 10 (very hard) — used to weight undercut value. */
     @Column(name = "overtaking_difficulty")
     private Integer overtakingDifficulty;
+
+    /** OpenF1's circuit_key, used to match this row on re-sync instead of duplicating it. */
+    @Column(name = "external_circuit_key", unique = true)
+    private Integer externalCircuitKey;
 }
